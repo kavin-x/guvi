@@ -1,5 +1,7 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:5500");
+ header('Access-Control-Allow-Origin: *');
+ header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+ header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRF-Token");
 session_start();
 
 $servername = "localhost";
@@ -18,8 +20,10 @@ if(isset($_POST['username'])) {
 	
 	$sql = "SELECT uid, user, pass, email FROM users WHERE email='$user_email'";
 	$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-	$row = mysqli_fetch_assoc($resultset);	
-		
+	$row = mysqli_fetch_assoc($resultset);
+	if($user_email==""){
+		echo "Cannot be Empty";
+	}	
 	if($row['pass']==$user_password){				
 		echo "ok";
 		$_SESSION['user_session'] = $row['uid'];
@@ -27,4 +31,5 @@ if(isset($_POST['username'])) {
 		echo "email or password does not exist."; // wrong details 
 	}		
 }
+
 ?>
