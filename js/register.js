@@ -7,6 +7,9 @@ $('document').ready(function() {
         required: true,
      minlength: 3
      },
+     user_dob: {
+      required: true,
+   },
      password: {
      required: true,
      minlength: 8,
@@ -20,10 +23,16 @@ $('document').ready(function() {
               required: true,
               email: true
               },
+      user_contact:{
+         required: true,
+         minlength: 10,
+     maxlength: 10
+      }
       },
          messages:
       {
               user_name: "please enter user name",
+              user_contact:'please enter contact number',
               password:{
                         required: "please provide a password",
                         minlength: "password at least have 8 characters"
