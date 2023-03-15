@@ -9,11 +9,6 @@ $client = new MongoDB\Client("mongodb+srv://kavinkumarab:8rpHrWFwoAQ3KqMf@cluste
 $db = $client->selectDatabase('test');
 $col = $db->selectCollection('users');
 
-$sql = $col->find([]);
-foreach ($sql as $cols) {
-	var_dump($cols->userName);
-}
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -34,8 +29,8 @@ if (isset($_POST['btn-save'])) {
 		'name' => $_POST['user_name'],
 		'email' => $_POST['user_email'],
 		'password' => $_POST['password'],
-		$user_dob = $_POST['user_dob'],
-	    $user_password = $_POST['password'],
+		'dob' =>$_POST['user_dob'],
+		'contact' => $_POST['user_contact'],
 	]);
 	$sql = "SELECT email FROM users WHERE email='$user_email'";
 	$resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));

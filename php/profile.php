@@ -8,10 +8,23 @@ $client = new MongoDB\Client("mongodb+srv://kavinkumarab:8rpHrWFwoAQ3KqMf@cluste
 $db = $client->selectDatabase('test');
 $col = $db->selectCollection('users');
 
-if (isset($_POST['username'])) {
+if (isset($_POST['password'])) {
 	$user_email = trim($_POST['username']);
 	$user_password = trim($_POST['password']);
-    $document = $col->findOne(['name' => $user_email]);
+    $document = $col->findOne(['email' => $user_email]);
+    $document['status']=200;
+    $json = json_encode( $document->getArrayCopy() );
+    echo $json;
+}
+if (isset($_POST['user_dob'])) {
+	$user_dob = trim($_POST['user_dob']);
+	$user_contact = trim($_POST['user_contact']);
+    $user_address = trim($_POST['user_dob']);
+    $user_email = trim($_POST['username']);
+    $updateResult = $col->updateOne(
+        ['username' => 'user_email'],
+        ['$set' => ['state' => 'ny']]
+    );
     $document['status']=200;
     $json = json_encode( $document->getArrayCopy() );
     echo $json;
